@@ -2,6 +2,7 @@ import React from 'react';
 import Route from 'react-router/lib/Route';
 import IndexRoute from 'react-router/lib/IndexRoute';
 import App from '../components/App';
+import LoginRoute from './login';
 
 function handleError(err) {
   // TODO: Error handling, do we return an Error component here?
@@ -30,11 +31,16 @@ function resolveAboutComponent(nextState, cb) {
  * @see https://github.com/reactjs/react-router/blob/master/docs/guides/DynamicRouting.md
  * @see https://gist.github.com/sokra/27b24881210b56bbaff7#code-splitting-with-es6
  */
-const routes = (
-  <Route path="/" component={App}>
-    <IndexRoute getComponent={resolveIndexComponent} />
-    <Route path="about" getComponent={resolveAboutComponent} />
-  </Route>
-);
+const routes = {
+  path: '/',
+  component: App,
+  indexRoute: {
+    getComponent: resolveIndexComponent
+  },
+  childRoutes: [
+    {path:'about', getComponent: resolveAboutComponent},
+    LoginRoute
+  ]
+};
 
 export default routes;
