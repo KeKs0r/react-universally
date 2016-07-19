@@ -279,6 +279,8 @@ function webpackConfigFactory({ target, mode }, { json }) {
                 // Webpack 2 includes support for es2015 imports, therefore we used this
                 // modified preset.
                 'es2015-webpack',
+                //Added Stage 0 for destructor
+                'stage-0'
               ],
             })
           ),

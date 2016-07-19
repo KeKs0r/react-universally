@@ -2,7 +2,7 @@ import React from 'react';
 import Route from 'react-router/lib/Route';
 import IndexRoute from 'react-router/lib/IndexRoute';
 import App from '../components/App';
-import LoginRoute from './login';
+// import LoginView from '../components/Login';
 
 function handleError(err) {
   // TODO: Error handling, do we return an Error component here?
@@ -18,6 +18,12 @@ function resolveIndexComponent(nextState, cb) {
 
 function resolveAboutComponent(nextState, cb) {
   System.import('../components/About')
+    .then(module => cb(null, module.default))
+    .catch(handleError);
+}
+
+function resolveLoginChildren(nextState, cb) {
+  System.import('./login')
     .then(module => cb(null, module.default))
     .catch(handleError);
 }
@@ -39,7 +45,16 @@ const routes = {
   },
   childRoutes: [
     {path:'about', getComponent: resolveAboutComponent},
-    LoginRoute
+    // {
+    //   path: 'login',
+    //   component: LoginView,
+    //   indexRoute: {
+    //     onEnter: (nextState, transition) => {
+    //       transition('/login/first');
+    //     }
+    //   },
+    //   getChildRoutes: resolveLoginChildren
+    // }
   ]
 };
 
