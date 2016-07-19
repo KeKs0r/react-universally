@@ -344,10 +344,8 @@ const excludeCSSModules = isUsingCSSModules ? cssModulesRegex : false
           })
         ),
         // SCSS (@custom)
-        merge({
-          test: /\.scss$/,
-          exclude: excludeCSSModules
-        },
+        merge(
+          { test: /\.scss$/, exclude: excludeCSSModules },
           ifServer({
             loaders: [
               'fake-style-loader',
@@ -374,7 +372,20 @@ const excludeCSSModules = isUsingCSSModules ? cssModulesRegex : false
               'sass?sourceMap'
             ],
           })
-        )// Merge SCSS
+        ),// Merge SCSS
+
+        /*
+          FontGen Loader
+          @todo: Check if this is needed for client as well as server
+        */
+        {
+          test: /\.font\.(js|json)$/,
+          loaders: [
+            'style',
+            'css',
+            'fontgen'
+          ]
+        }
       ],
     },
   };

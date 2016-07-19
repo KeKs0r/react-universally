@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../style/core.scss';
-// import 'style/awesomecons.font.js';
+import '../../style/awesomecons.font.js';
 
 
 export default function App({children}) {
