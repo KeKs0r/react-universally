@@ -8,7 +8,7 @@ import compression from 'compression';
 import hpp from 'hpp';
 import helmet from 'helmet';
 import universalReactAppMiddleware from './middleware/universalReactApp';
-import clientConfigBuilder from '../../webpack.client.config.js';
+import clientConfigBuilder from '../webpack.client.config.js';
 
 // Create our express based server.
 const app = express();

@@ -129,7 +129,8 @@ function webpackConfigFactory({ target, mode }, { json }) {
         main: removeEmpty([
           ifDevClient('react-hot-loader/patch'),
           ifDevClient(`webpack-hot-middleware/client?reload=true&path=http://localhost:${process.env.CLIENT_DEVSERVER_PORT}/__webpack_hmr`),
-          path.resolve(__dirname, `./src/${target}/index.js`),
+          ifServer(path.resolve(__dirname, `./server/index.js`)),
+          ifClient(path.resolve(__dirname, `./src/index.js`))
         ]),
       }
     ),
