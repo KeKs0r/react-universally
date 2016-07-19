@@ -1,0 +1,8 @@
+
+
+.vatom-grid {
+    @extend .container-narrow;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}

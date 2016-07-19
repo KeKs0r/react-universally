@@ -79,6 +79,26 @@ function webpackConfigFactory({ target, mode }, { json }) {
   const ifDevServer = ifElse(isDev && isServer);
   const ifProdClient = ifElse(isProd && isClient);
 
+// ------------------------------------
+// Style Loaders
+// ------------------------------------
+// We use cssnano with the postcss loader, so we tell
+// css-loader not to duplicate minimization.
+const BASE_CSS_LOADER = 'css?sourceMap&-minimize'
+
+// Add any packge names here whose styles need to be treated as CSS modules.
+// These paths will be combined into a single regex.
+const PATHS_TO_TREAT_AS_CSS_MODULES = [
+    // 'react-toolbox',
+]
+
+const isUsingCSSModules = !!PATHS_TO_TREAT_AS_CSS_MODULES.length
+const cssModulesRegex = new RegExp(`(${PATHS_TO_TREAT_AS_CSS_MODULES.join('|')})`)
+// Loaders for files that should not be treated as CSS modules.
+const excludeCSSModules = isUsingCSSModules ? cssModulesRegex : false
+
+
+
   return {
     // We need to state that we are targetting "node" for our server bundle.
     target: ifServer('node', 'web'),
@@ -164,6 +184,7 @@ function webpackConfigFactory({ target, mode }, { json }) {
       libraryTarget: ifServer('commonjs2', 'var'),
     },
     resolve: {
+      root: path.resolve(__dirname, './src'),
       // These extensions are tried when resolving a file.
       extensions: [
         '.js',
@@ -322,6 +343,38 @@ function webpackConfigFactory({ target, mode }, { json }) {
             ],
           })
         ),
+        // SCSS (@custom)
+        merge({
+          test: /\.scss$/,
+          exclude: excludeCSSModules
+        },
+          ifServer({
+            loaders: [
+              'fake-style-loader',
+              BASE_CSS_LOADER,
+              'postcss',
+              'sass?sourceMap'
+            ]
+          }),
+          ifProdClient({
+            loader: ExtractTextPlugin.extract({
+              notExtractLoader: 'style-loader',
+              loader: [
+                BASE_CSS_LOADER,
+                'postcss',
+                'sass'
+              ]
+            }),
+          }),
+          ifDevClient({
+            loaders: [
+              'style',
+              BASE_CSS_LOADER,
+              'postcss',
+              'sass?sourceMap'
+            ],
+          })
+        )// Merge SCSS
       ],
     },
   };

@@ -1,0 +1,47 @@
+
+.recent-contacts {
+    display: flex;
+    padding: 1rem;
+    overflow-x:scroll;
+}
+
+.recent-contact {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 50px;
+    float: left;
+    margin-right: 1.5rem;
+    text-align: center;
+    font-size: .7rem;
+    &.is-selected{
+        .recent-avatar{
+            background-color: $green ;
+            //background-size: 0;
+            &:after{
+                transform: scale(1);
+            }
+        }//recent-avatar
+    }
+}
+
+.recent-avatar {
+    height: 50px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: $gray-lt;
+    background-size: cover;
+    margin: 10px auto;
+    &:after{
+        content: "\F104";
+        font-family:  Awesomecons !important;
+        font-size: 1.5rem;
+        color: $white;
+        transform: scale(0);
+        transition: transform .2s ease-in-out;
+    }
+}

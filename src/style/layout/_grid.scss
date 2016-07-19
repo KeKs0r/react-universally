@@ -1,0 +1,14 @@
+
+
+.container {
+    width: 100%;
+    max-width: $max-width;
+    display: block;
+    margin: 0 auto;
+    &.flex-apart {
+        display: flex;
+        justify-content: space-between;
+    }
+
+}
+

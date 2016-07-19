@@ -1,0 +1,20 @@
+
+
+.action-tools {
+    display: flex;
+    overflow: hidden;
+    i {
+        color: $gray;
+        margin-left: 1rem;
+        background-color: transparent;
+
+        &:hover{
+            color: $gray-dk;
+            cursor: pointer;
+        }
+    }//i
+    .ai-star_filled{
+        color: $yellow;
+    }
+
+}

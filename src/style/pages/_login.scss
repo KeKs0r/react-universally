@@ -1,0 +1,68 @@
+// -----------------------------------------------------------------------------
+// This file contains styles that are specific to the login page.
+// -----------------------------------------------------------------------------
+
+
+.login-frame {
+    position: relative;
+    width: 850px;
+    height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    //padding:0 20px;
+    border-radius: 3px;
+    background-color: transparent;
+    @include breakpoint(sm){
+        display: flex;
+        justify-content: space-between;
+        background-color: $black;
+    }
+}
+
+.login-guide {
+    display: none;
+    max-width: 300px;
+    color: $white;
+    >img{
+        position: absolute;
+        top: 50px;
+        left: 50px;
+        max-width: 45px;
+    }
+    h1{
+        padding-left: 50px;
+    }
+    p{color:$white}
+    @include breakpoint(sm){
+        display: block;
+    }
+}
+
+.login-card {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    //transform: translateY(10px);
+    background-color: $white;
+    padding: 3rem 2rem;
+    z-index: 1;
+    > div{
+        width: 100%;
+    }
+    .btn-pill_block {
+        margin-top: 1rem;
+    }
+    .thumb-image_wrap{
+        margin: 0 auto;
+    }
+    @include breakpoint(sm){
+        width: 400px;
+        height: 540px;
+        padding: 2rem;
+        border-radius: 3px;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,79 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass variables.
+// -----------------------------------------------------------------------------
+
+/// Main brand color PURPLE
+/// @type Color
+
+$purple-dk:   #34394c !default;
+$purple-lt:   #6469ba !default;
+$brand-color: $purple-lt !default;
+
+$black: #262626 !default;
+$white: #F8F8F8 !default;
+
+$gray: #979797 !default;
+$gray-lt: #D8D8D8 !default ;
+$gray-xlt: #f5f6f8 !default;
+$gray-dk: #4A4A4A !default;
+
+$blue:  #5393C6 !default;
+$blue-dk: #252B3F !default;
+$blue-pale: #EEF1F4 !default;
+$blue-pale-dk: #E3E8EC !default;
+$aqua :  #1ba8c6 !default;
+
+$pink: #F02381 !default;
+$green:  #64BA74 !default;
+$red:   #DB5029 !default;
+$orange: #FF7E00 !default;
+$yellow: #FFD724 !default;
+
+$text-color: $black !default;
+
+
+$unit: 1rem !default;
+// This is the default html and body font-size for the base rem value.
+$rem-base: 16px;
+
+//-- Color configuration
+$color-divider: $brand-color !default;
+
+/// Regular font family
+/// @type List
+$text-font-stack: 'Roboto', 'Helvetica Neue Light', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif !default;
+
+
+/// Container's maximum width
+/// @type Length
+$max-width: 1240px !default;
+
+$boxed-narrow: 720px;
+
+
+
+
+
+/// Breakpoints map
+/// @prop {String} keys - Keys are identifiers mapped to a given length
+/// @prop {Map} values - Values are actual breakpoints expressed in pixels
+/// @see {mixin} respond-to
+// $breakpoints: (
+//   'sm': (min-width: 320px),
+//   'med': (min-width: 768px),
+//   'lg': (min-width: 1024px),
+// ) !default;
+
+$breakpoint-sm:  600px !default;
+$breakpoint-med: 1073px !default;
+$breakpoint-lg:  1200px !default;
+$breakpoint-xlg: 1600px !default;
+
+
+
+
+/// Relative or absolute URL where all assets are served from
+/// @type String
+/// @example scss - When using a CDN
+///   $base-url: 'http://cdn.example.com/assets/';
+$base-url: '/assets/' !default;

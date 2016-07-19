@@ -1,0 +1,52 @@
+.flip-card {
+  position: relative;
+  transform-style: preserve-3d;
+  //transition: 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+  //transform: translateY(100%);
+  transition: 0.6s cubic-bezier(0.175, 0.885, 0.320, 1.275);
+  height: 80vh;
+  width: 320px;
+  will-change: transform;
+  &.is-flipped{
+    transform: rotateY(180deg);
+    .back{
+      background-color: $white;
+    }
+  }
+  &.is-up{
+    //transform: translateY(0);
+  }
+  @include breakpoint(sm) {
+    height: 600px;
+    width: 400px;
+    margin-top: 0;
+  }
+}
+
+.front, .back {
+  height: 100%;
+  width: 100%;
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 5px;
+  transition: background-color .2s ease;
+}
+
+/* front pane, placed above back */
+.front {
+  z-index: 2;
+  /* for firefox 31 */
+  transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.back {
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  transform: rotateY(180deg);
+  overflow: hidden;
+
+}

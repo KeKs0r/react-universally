@@ -1,0 +1,44 @@
+
+
+.nav-top {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    @include breakpoint(sm) {
+      display: flex;
+    }
+
+
+}
+
+.nav-link,
+ .util-link {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-size: 0.85rem;
+    color: #7b7f8b;
+    &:hover{
+        color: $white;
+    }
+    &.active {
+        color: $white;
+        border-top: 2px solid $aqua;
+    }
+}
+
+.util-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1rem;
+}
+
+.util-link {
+    > i{
+        font-size: 1.5rem;
+        padding-right: .5rem;
+        vertical-align: middle;
+    }
+}
+

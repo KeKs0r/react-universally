@@ -1,0 +1,42 @@
+
+.contacts-list-item {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: $white;
+    border-bottom: 1px solid $gray-lt;
+    transition: background-color .2s ease;
+    &:hover {
+        background-color: darken($white, 2%);
+        cursor: pointer;
+    }
+
+}
+
+.contact-details {
+    width: 66%;
+    h4{
+        font-size: 1.1rem;
+        font-weight: 400;
+        margin: 0;
+    }
+    p{
+        margin: 0;
+        padding-top: .5rem;
+        font-size: .9rem;
+    }
+}
+
+.contact-avatar {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background-size: cover;
+    overflow: hidden;
+    &.is-selected {
+        background-color: $green;
+        background-image: none;
+    }
+}

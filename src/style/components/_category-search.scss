@@ -1,0 +1,91 @@
+
+.category-search_wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    a:hover i{color: $blue}
+    i {
+        color: $white ;
+        font-size: 1.25rem;
+        transition: color .2s ease;
+    }
+    @include breakpoint(sm) {
+      i {font-size: 1.5rem}
+    }
+}
+
+.category-wrap {
+    //display: flex;
+    align-items: center;
+}
+
+.category-toggle {
+    color: $white;
+    font-size: 1.25rem;
+    padding-left: 1rem;
+
+    > i{
+        position: relative;
+        top: .5rem;
+        padding-left: .5rem;
+        font-size: 1.5rem;
+        transition: transform .2s ease;
+    }
+    &.active{
+        color: $aqua;
+        >i{
+            transform: rotate(180deg);
+        }
+    }
+    &:hover {
+        color: $aqua;
+        cursor: pointer;
+    }
+    @include breakpoint(sm) {
+      font-size: 2rem;
+    }
+}
+
+.search-form{
+    //min-width: 300px;
+    opacity: 0;
+     .search-input{
+        input[type="search"]{
+            @extend .input-naked;
+            width: 100%;
+            font-size: 0.8rem;
+            font-weight: 100;
+        }
+        @include breakpoint(sm) {
+          input[type="search"]{
+            font-size: 1.5rem;
+          }
+        }
+    }
+    &.search-active {
+        opacity: 1;
+    }
+}//search-form
+
+.search-wrap {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    i{
+        color: $white;
+        font-size: 1.25rem;
+    }
+    @include breakpoint(sm) {
+    width: 720px;
+      i{
+        font-size: 1.25rem;
+      }
+    }
+}
+
+.user-tools {
+    display: flex;
+    align-items: center;
+}

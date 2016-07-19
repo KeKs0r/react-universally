@@ -1,0 +1,194 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the button component.
+// -----------------------------------------------------------------------------
+
+a {
+    transition: all .3s ease;
+    &:hover{
+        text-decoration: none;
+        color: inherit;
+    }
+    &:focus{
+        text-decoration: none;
+    }
+}
+
+[data-react-toolbox="button"] {
+    display: flex;
+    text-transform: none;
+    font-size: 1rem;
+    font-weight: 300;
+    margin: 1rem auto;
+    i{
+        position: relative;
+        font-size: 1.5rem;
+        padding-right: .3rem;
+    }
+}
+
+.btn {
+    color: $white ;
+}
+
+.btn-full{
+    @extend .btn;
+    width: 100%;
+}
+
+.btn-flat {
+    color: $gray;
+}
+
+.link-icon{
+    display: flex;
+    align-items: center;
+    @include fontSize(20px);
+    color: $white;
+    i{
+        margin-right: .5rem;
+    }
+    &:hover{
+        color: $blue;
+    }
+}
+
+
+.btn-pill_block {
+    position: relative;
+    display: block;
+    width: 100%;
+    border-radius: 30px;
+    padding: 1.25rem .5rem;
+    margin: .5rem auto;
+    color: $white;
+    text-align: center;
+    &:hover {
+        color: $white;
+    }
+
+    i {
+        position: absolute;
+        left: 20px; top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.5rem;
+    }
+    &.is-red {
+        background-color: $red;
+        &:hover {
+            background-color: darken($red, 5%);
+        }
+    }
+    &.is-blue {
+        background-color: $blue;
+        &:hover {
+            background-color: darken($blue, 5%);
+        }
+    }
+    &.is-prpl {
+        background-color: $brand-color;
+        &:hover {
+            background-color: darken($brand-color, 5%);
+        }
+    }
+    &.is-green {
+        background-color: $green;
+        &:hover {
+            background-color: darken($green, 5%);
+        }
+    }
+    &.is-white {
+        background-color: transparent;
+        border: 1px $gray solid;
+        color: $gray;
+        &:hover {
+            background-color: $gray;
+            color: $white;
+        }
+    }
+    &:disabled,
+    &:disabled:hover {
+        background-color: $gray;
+        cursor: not-allowed;
+        opacity: .45;
+    }
+}
+
+.icon-close_right {
+    position: absolute;
+    top: 20px; right: 20px;
+    color: $gray;
+}
+.icon-back_left {
+    position: absolute;
+    top: 20px; left: 20px;
+    color: $gray;
+}
+
+.validation-check {
+  position:absolute;
+  top:50%;
+  right:0;
+  transform:translateY(-50%);
+  color:green;
+  background:transparent;
+}
+
+.split-buttons {
+    display: flex;
+    margin-top: 1rem;
+
+    .btn-split_left,
+    .btn-split_right,
+    .btn-split_google,
+    .btn-split_fb {
+        width: 50%;
+        display: block;
+        padding: 1.05rem .5rem;
+        color: $gray;
+        border: 1px $gray solid;
+        &:hover{
+            background-color: $gray;
+            color: $white;
+        }
+        >i {
+            color: $white;
+            font-size: 1.5rem;
+        }
+    }
+    .btn-split_left{
+        border-top-left-radius: 30px;
+        border-bottom-left-radius: 30px;
+    }
+    .btn-split_right{
+        border-left: none;
+        border-top-right-radius: 30px;
+        border-bottom-right-radius: 30px;
+    }
+    .btn-split_google{
+        border: none;
+        border-top-left-radius: 30px;
+        border-bottom-left-radius: 30px;
+        background-color: $red;
+        &:hover{
+            background-color: darken($red, 5%);
+        }
+    }
+    .btn-split_fb{
+        border: none;
+        border-left: none;
+        border-top-right-radius: 30px;
+        border-bottom-right-radius: 30px;
+        background-color: $blue;
+        &:hover{
+            background-color: darken($blue, 5%);
+        }
+    }
+}
+
+.tandem-buttons {
+    display: flex;
+    justify-content: space-between;
+    .btn-pill_block:first-child {
+       margin-right: 1rem;
+    }
+}

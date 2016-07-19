@@ -1,0 +1,93 @@
+//**
+ //* Basic typography style for copy text
+// */
+body {
+  color: $text-color;
+  font-family: $text-font-stack;
+  font-weight: 300;
+}
+p{
+    @include fontSize(16px);
+    @include breakpoint(sm) {
+      @include fontSize(20px);
+    }
+}
+h1 {
+    color: $gray-dk;
+    font-weight: 100;
+    @include fontSize(24px);
+    @include breakpoint(sm) {
+      @include fontSize(36px);
+    }
+}
+h2 {
+    color: $gray-dk;
+    @include fontSize(20px);
+    @include breakpoint(sm) {
+      @include fontSize(32px);
+    }
+}
+h3 {
+    color: $gray-dk;
+    font-weight: 400;
+    @include fontSize(26px);
+    @include breakpoint(sm) {
+      @include fontSize(16px);
+    }
+}
+h4 {
+    color: $black;
+    font-weight: 400;
+    @include fontSize(20px);
+    @include breakpoint(sm) {
+      @include fontSize(12px);
+    }
+}
+
+
+
+.lead {
+    font-size: 1.25rem;
+    margin: .5rem 0;
+}
+p.small {
+    font-size: .9rem;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-bold {
+    font-weight: 500;
+    color: $brand-color;
+}
+
+.inline-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $gray;
+    font-size: .9rem;
+    i{
+        font-size: 1.25rem;
+        padding-right: .3rem;
+    }
+}
+
+.partition {
+    width: 100%;
+    position: relative;
+    margin-top: 2rem ;
+    border-top: 1px solid $gray-lt;
+    span{
+        position: absolute;
+        top: -9px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: $gray-lt;
+        font-size: .8rem;
+        background-color: $white;
+        padding: 0 .5rem;
+    }
+}

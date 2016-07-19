@@ -1,0 +1,21 @@
+
+
+.form-centered {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    img{
+        max-width: 100%;
+        margin-bottom: .5rem;
+    }
+    .small {
+        padding: 1rem;
+        max-width: 80%;
+        margin: 0 auto;
+    }
+    h1 {
+        line-height: 0;
+    }
+}

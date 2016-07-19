@@ -1,0 +1,82 @@
+.send-wrapper {
+    width: 360px;
+    height: 95%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    background-color: $white;
+    @include breakpoint(sm) {
+      min-height: 600px;
+      width: 400px;
+    }
+}
+.send-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    color: $white;
+
+}
+
+.send-form {
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 180px;
+    padding: .5rem 1rem;
+    background-color: $purple-dk;
+
+    [data-react-toolbox="button"] {
+        position: absolute;
+        bottom: -46px ; right: 20px;
+        i{
+            color: $white;
+            padding: 0;
+        }
+        >img{
+            width: 45%;
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate3d(-50% , -50% , 0);
+        }
+    }
+}
+
+.send-section_title{
+    width: 100%;
+    padding: 5px 8px;
+    background-color: $gray-xlt;
+    span{
+        font-size: .8rem;
+    }
+}
+
+.send-confirm {
+    text-align: center;
+    > img {
+        max-width: 90%;
+    }
+    h3{
+        font-size: 1.3rem;
+        line-height: 1;
+        color: $green;
+        margin: 0;
+    }
+}
+
+.no-contacts {
+    padding: 1rem;
+    text-align: center;
+    color: $gray;
+    h3{
+        font-size: 1.5rem;
+        color: $gray;
+    }
+    p{
+        font-size: .9rem;
+        margin-bottom: 5rem;
+    }
+}

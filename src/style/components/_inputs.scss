@@ -1,0 +1,95 @@
+
+
+ [data-react-toolbox="input"] {
+    width: 100%;
+    &:focus, &.filled, &[type='date'], &[type='time'] {
+      ~ .label:not(.fixed) {
+        top: .5rem;
+        font-size: .5rem;
+      }
+    }
+    label {
+        top: 2.2rem;
+    }
+    > span {
+        //background-color: $brand-color;
+    }
+    .input-icon,
+    .input-btn,
+    .input-link{
+        position: absolute;
+        top: 29px;
+        right: 0;
+    }
+    .input-link{
+        font-size: .75rem;
+    }
+}
+
+[data-react-toolbox="font-icon"] {
+    position: absolute;
+        top: 1.1rem;
+        left: -5rem;
+        display: block;
+        width: 2.8rem;
+        height: 2.8rem;
+        font-size: 2rem !important;
+        line-height: 2.8rem !important;
+        color: rgba(0, 0, 0, 0.26);
+        text-align: center;
+}
+
+.tandem-inputs {
+    display: flex;
+    justify-content: space-between;
+    [data-react-toolbox="input"] {
+        width: 48%;
+    }
+
+}
+.tandem-inputs_prefixed {
+    display: flex;
+    justify-content: space-between;
+    .tel-prefix{
+        width: 20%;
+        margin-right: 10px;
+    }
+    [name="phone_prefix"]{
+        color: $gray;
+    }
+}
+
+.phonePrefix{
+    // position: absolute;
+    // top: 0;
+    // left: 0;
+    //font-size: 1rem;
+}
+
+.input-prepend {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    color: $white;
+    &:nth-child(even){
+        border-bottom: 1px solid rgba($white, 0.2);
+    }
+    span{
+        margin-right: 1rem;
+    }
+
+}
+.input-naked{
+    width: 100%;
+    background-color: transparent;
+    color: $white;
+    outline: none;
+    border: none;
+}
+.input-naked + .input-naked {
+    border-bottom: 1px solid rgba($white, 0.2);
+}
+
+

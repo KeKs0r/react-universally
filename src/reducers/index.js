@@ -4,7 +4,7 @@ import { routerReducer as routing} from 'react-router-redux';
 // import vatoms from './vatoms';
 // import contacts from './contacts';
 // import auth from './auth';
-// import ui from './ui';
+import ui from './ui';
 
 export const makeRootReducer = (asyncReducers) => {
   return combineReducers({

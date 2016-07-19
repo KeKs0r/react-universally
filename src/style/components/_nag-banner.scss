@@ -1,0 +1,34 @@
+
+
+.nag-banner_wrap {
+    position: fixed;
+    left: 0 ; bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 75px;
+    border-top: 1px solid $gray-lt;
+    background-color: $white;
+    transform: translateY(80px);
+    transition: transform .4s ease;
+    @include breakpoint(sm) {
+      display: none;
+    }
+    &.is-up{
+        transform: translateY(0);
+    }
+
+
+}
+
+.nag-banner{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 320px;
+    img{
+        max-height: 50px;
+    }
+}

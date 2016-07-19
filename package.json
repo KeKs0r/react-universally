@@ -10,7 +10,9 @@
     "clean": "rimraf build",
     "dev": "node ./devServer",
     "build": "npm run clean && webpack --env.mode production --config webpack.client.config.js && webpack --env.mode production --config webpack.server.config.js",
-    "start": "node build/server/main.js"
+    "start": "node build/server/main.js",
+    "buildServer": "webpack --env.mode production --config webpack.server.config.js",
+    "buildClient": "npm run clean && webpack --env.mode production --config webpack.client.config.js"
   },
   "repository": {
     "type": "git",
@@ -70,10 +72,13 @@
     "fake-style-loader": "1.0.1",
     "json-loader": "0.5.4",
     "node-notifier": "4.6.0",
+    "node-sass": "^3.8.0",
     "normalize.css": "4.2.0",
     "path": "0.12.7",
+    "postcss-loader": "^0.9.1",
     "react-hot-loader": "3.0.0-beta.2",
     "rimraf": "2.5.3",
+    "sass-loader": "^4.0.0",
     "style-loader": "0.13.1",
     "webpack": "2.1.0-beta.19",
     "webpack-dev-middleware": "1.6.1",

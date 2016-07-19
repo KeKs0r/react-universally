@@ -1,0 +1,64 @@
+$unit: 1rem !default;
+$brand-color: #6469ba !default;
+$blue:  #5393C6 ;
+$blue-pale-dk: #E3E8EC !default;
+$white: #F8F8F8;
+$orange: #ff7e00;
+$color: #ffffff;
+$color-primary: $brand-color !default;
+$color-primary-dark: $palette-pink-a200 !default;
+$color-accent: $palette-pink-a200 !default;
+$color-accent-dark: $palette-pink-700 !default;
+$color-primary-contrast: $white !default;
+$color-accent-contrast: $white !default;
+
+
+// ============================================= //
+//            Toolbox Input Theme                //
+// ============================================= //
+$input-field-font-size: 1.0 * $unit;
+$input-label-font-size: 0.8 * $unit;
+$input-padding: 1rem;
+$input-field-padding: .8rem;
+$input-focus-label-top: .3 * $unit ;
+$input-text-error-color: $orange !default;
+
+// ============================================= //
+//            Toolbox Button Theme                //
+// ============================================= //
+$button-neutral-color: $white !default;
+$button-neutral-color-contrast: $palette-grey-900 !default;
+$button-neutral-color-hover: rgba($palette-grey-900, 0.20) !default;
+$button-primary-color-contrast: $color-primary-contrast !default;
+$button-primary-color-hover: rgba($color-primary, 0.20) !default;
+$button-primary-color: $blue !default;
+$button-height: $unit * 2.75 !default;
+$button-squared-icon-margin: $unit * .6 !default;
+$button-squared-min-width: 9 * $unit !default;
+$button-squared-padding: 0 $unit * 1.2 !default;
+$button-toggle-font-size: $unit * 1 !default;
+
+$list-vertical-padding: .8 * $unit !default;
+$list-horizontal-padding: 1.6 * $unit !default;
+$list-content-left-spacing: 7.2 * $unit !default;
+$list-subheader-height: 4.8 * $unit !default;
+$list-subheader-font-size: 1.4 * $unit !default;
+$list-subheader-font-weight: 500 !default;
+$list-divider-height: .1 * $unit !default;
+$list-item-min-height: 2.8 * $unit !default;
+$list-item-min-height-legend: 7.2 * $unit !default;
+$list-item-hover-color: $palette-grey-200 !default;
+$list-item-legend-margin-top: .3 * $unit !default;
+$list-item-icon-font-size: 2.4 * $unit !default;
+$list-item-icon-size: 1.8 * $unit !default;
+$list-item-right-icon-margin: $list-content-left-spacing - 2 * $list-horizontal-padding - $list-item-icon-size !default;
+$list-item-right-checkbox-margin: $list-item-right-icon-margin + $list-horizontal-padding !default;
+$list-item-avatar-height: 1 * $unit !default;
+$list-item-avatar-margin: .8 * $unit !default;
+$list-item-child-margin: .8 * $unit !default;
+
+$avatar-color: $color-white !default;
+$avatar-background: $palette-grey-500 !default;
+$avatar-size: 3 * $unit !default;
+$avatar-font-size: 2.4 * $unit !default;
+

@@ -1,0 +1,33 @@
+$tab-label-disabled-opacity: .2 !default;
+$tab-label-h-padding: 1.2 * $unit !default;
+$tab-label-height: 4.8 * $unit !default;
+$tab-text-height: 1.4 * $unit !default;
+$tab-label-v-padding: ($tab-label-height - $tab-text-height) / 2 !default;
+$tab-navigation-border-color: $brand-color !default;
+$tab-pointer-color: $brand-color !default;
+$tab-pointer-height: .2 * $unit !default;
+$tab-text: $black !default;
+$tab-text-color: $tab-text !default;
+$tab-text-inactive-color: rgba($black, 0.20) !default;
+
+.tabs {
+    width: 100%;
+    outline: none;
+    &:focus {
+        outline: none;
+    }
+    nav {
+        width: 100%;
+        justify-content: space-between;
+        > label {
+            text-transform: none;
+            padding: 1.75rem 2.5rem;
+            font-size: 1.25rem;
+            font-weight: 300;
+        }
+    }
+
+    > span {
+        background-color: $brand-color;
+    }
+}

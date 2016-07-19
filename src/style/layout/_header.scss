@@ -1,0 +1,15 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the header of the site/application.
+// -----------------------------------------------------------------------------
+
+.header {
+    height: 70px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: $purple-dk;
+    transform: translateZ(0);
+    @include breakpoint(sm) {
+      height: 100px;
+    }
+}

@@ -1,0 +1,15 @@
+
+.meta-card_list {
+    >li{
+        display: flex;
+        color: $gray;
+        margin-bottom: 2rem;
+
+        p{
+            @include fontSize(14px);
+            margin: 0 0 0 1rem;
+            color: $gray-dk;
+            span{color: $gray; padding-right: .25rem;}
+        }
+    }
+}
