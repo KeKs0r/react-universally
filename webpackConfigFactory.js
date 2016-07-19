@@ -173,18 +173,23 @@ const excludeCSSModules = isUsingCSSModules ? cssModulesRegex : false
       chunkFilename: '[name]-[chunkhash].js',
       // This is the web path under which our webpack bundled output should
       // be considered as being served from.
-      publicPath: ifDev(
+      publicPath: //'/',
+
+      ifDev(
         // As we run a seperate server for our client and server bundles we
         // need to use an absolute http path for our assets public path.
-        `http://localhost:${process.env.CLIENT_DEVSERVER_PORT}/assets/`,
+        //`http://localhost:${process.env.CLIENT_DEVSERVER_PORT}/assets/`,
+        // @custom
+        //did not work with font-gen loader
+        '/',
         // Otherwise we expect our bundled output to be served from this path.
         '/assets/'
       ),
+
       // When in server mode we will output our bundle as a commonjs2 module.
       libraryTarget: ifServer('commonjs2', 'var'),
     },
     resolve: {
-      root: path.resolve(__dirname, './src'),
       // These extensions are tried when resolving a file.
       extensions: [
         '.js',
@@ -376,16 +381,38 @@ const excludeCSSModules = isUsingCSSModules ? cssModulesRegex : false
 
         /*
           FontGen Loader
+          @custom
           @todo: Check if this is needed for client as well as server
         */
-        {
-          test: /\.font\.(js|json)$/,
-          loaders: [
-            'style',
-            'css',
-            'fontgen'
-          ]
-        }
+        merge(
+          // { test: /\.font\.(js|json)$/ },
+          { test: /\.font$/ },
+          ifServer({
+            loaders: [
+              'fake-style-loader',
+              'css',
+              'fontgen'
+            ]
+          }),
+          ifClient({
+            loaders: [
+              'style',
+              'css',
+              'fontgen'
+            ]
+          })
+        ),
+        /*
+          File Loader (fonts and images)
+          @custom
+        */
+        // { test: /\.woff(\?.*)?$/,  loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff' },
+        // { test: /\.woff2(\?.*)?$/, loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff2' },
+        // { test: /\.otf(\?.*)?$/,   loader: 'file?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=font/opentype' },
+        // { test: /\.ttf(\?.*)?$/,   loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/octet-stream' },
+        // { test: /\.eot(\?.*)?$/,   loader: 'file?prefix=fonts/&name=[path][name].[ext]' },
+        // { test: /\.svg(\?.*)?$/,   loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=image/svg+xml' },
+        { test: /\.(png|jpg|gif)$/,    loader: 'url?limit=8192' }
       ],
     },
   };

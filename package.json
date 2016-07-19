@@ -12,7 +12,9 @@
     "build": "npm run clean && webpack --env.mode production --config webpack.client.config.js && webpack --env.mode production --config webpack.server.config.js",
     "start": "node build/server/main.js",
     "buildServer": "webpack --env.mode production --config webpack.server.config.js",
-    "buildClient": "npm run clean && webpack --env.mode production --config webpack.client.config.js"
+    "buildClient": "npm run clean && webpack --env.mode production --config webpack.client.config.js",
+    "buildServerDev": "webpack --env.mode development --config webpack.server.config.js",
+    "buildClientDev": "npm run clean && webpack --env.mode development --config webpack.client.config.js"
   },
   "repository": {
     "type": "git",
@@ -81,6 +83,7 @@
     "rimraf": "2.5.3",
     "sass-loader": "^4.0.0",
     "style-loader": "0.13.1",
+    "url-loader": "^0.5.7",
     "webpack": "2.1.0-beta.19",
     "webpack-dev-middleware": "1.6.1",
     "webpack-hot-middleware": "2.12.1",

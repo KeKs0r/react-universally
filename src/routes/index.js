@@ -2,7 +2,7 @@ import React from 'react';
 import Route from 'react-router/lib/Route';
 import IndexRoute from 'react-router/lib/IndexRoute';
 import App from '../components/App';
-// import LoginView from '../components/Login';
+import LoginLayout from '../components/App/LoginLayout';
 
 function handleError(err) {
   // TODO: Error handling, do we return an Error component here?
@@ -22,11 +22,14 @@ function resolveAboutComponent(nextState, cb) {
     .catch(handleError);
 }
 
-function resolveLoginChildren(nextState, cb) {
-  System.import('./login')
-    .then(module => cb(null, module.default))
-    .catch(handleError);
+function asyncResolve(name) {
+  return function resolveChildren(nextState, cb) {
+    System.import(`./${name}`)
+      .then(module => cb(null, module.default))
+      .catch(handleError);
+  }
 }
+
 
 /**
  * Our routes.
@@ -45,16 +48,16 @@ const routes = {
   },
   childRoutes: [
     {path:'about', getComponent: resolveAboutComponent},
-    // {
-    //   path: 'login',
-    //   component: LoginView,
-    //   indexRoute: {
-    //     onEnter: (nextState, transition) => {
-    //       transition('/login/first');
-    //     }
-    //   },
-    //   getChildRoutes: resolveLoginChildren
-    // }
+    {
+      path: 'login',
+      component: LoginLayout,
+      // indexRoute: {
+      //   onEnter: (nextState, transition) => {
+      //     transition('/login/first');
+      //   }
+      // },
+      getChildRoutes: asyncResolve('login')
+    }
   ]
 };
 
