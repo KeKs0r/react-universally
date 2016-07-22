@@ -36,6 +36,7 @@
   "homepage": "https://github.com/ctrlplusb/react-universally#readme",
   "dependencies": {
     "compression": "1.6.2",
+    "cssnano": "^3.7.3",
     "express": "4.14.0",
     "helmet": "2.1.1",
     "hpp": "0.2.1",
@@ -45,6 +46,7 @@
     "react-redux": "^4.4.5",
     "react-router": "2.5.2",
     "react-router-redux": "^4.0.5",
+    "react-toolbox": "^1.0.2",
     "redux": "^3.5.2",
     "redux-api-middleware": "^1.0.2",
     "redux-form": "^5.3.1",
@@ -83,6 +85,7 @@
     "rimraf": "2.5.3",
     "sass-loader": "^4.0.0",
     "style-loader": "0.13.1",
+    "toolbox-loader": "0.0.3",
     "url-loader": "^0.5.7",
     "webpack": "2.1.0-beta.19",
     "webpack-dev-middleware": "1.6.1",

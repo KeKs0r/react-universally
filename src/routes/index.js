@@ -4,6 +4,8 @@ import IndexRoute from 'react-router/lib/IndexRoute';
 import App from '../components/App';
 import LoginLayout from '../components/App/LoginLayout';
 
+import LoginChildren from './login';
+
 function handleError(err) {
   // TODO: Error handling, do we return an Error component here?
   console.log('==> Error occurred loading dynamic route'); // eslint-disable-line no-console
@@ -24,11 +26,12 @@ function resolveAboutComponent(nextState, cb) {
 
 function asyncResolve(name) {
   return function resolveChildren(nextState, cb) {
-    System.import(`./${name}`)
+    System.import('./login')
       .then(module => cb(null, module.default))
       .catch(handleError);
   }
 }
+
 
 
 /**
@@ -51,11 +54,11 @@ const routes = {
     {
       path: 'login',
       component: LoginLayout,
-      // indexRoute: {
-      //   onEnter: (nextState, transition) => {
-      //     transition('/login/first');
-      //   }
-      // },
+      indexRoute: {
+        onEnter: (nextState, transition) => {
+          transition('/login/login-prompt');
+        }
+      },
       getChildRoutes: asyncResolve('login')
     }
   ]

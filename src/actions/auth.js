@@ -1,61 +1,129 @@
 import { base_url, AUTH } from 'constants';
-import { CALL_API } from 'redux-api-middleware';
+import { CALL_API , getJSON, ApiError } from 'redux-api-middleware';
 import _ from 'lodash';
 import { initialize, reset } from 'redux-form';
 import { push } from 'react-router-redux'
+import { detectPrivateMode } from '../helpers/private'
+
+/*
+ * This import has quite the Tail
+ * Maybe this can be prevented with "Sagas"
+ */
 import { fetchVatoms } from './vatoms'
 
-export function login(email, pass){
+
+export const ERROR = {
+  UNAUTHORIZED:1001,
+  INVALID_PASSWORD: 1026,
+  USERNAME_NOT_FOUND: 1014,
+  ACCOUNT_NOT_FOUND: 1016
+}
+
+/*
+ Use this when you know the user exists AUTH.USER_EXISTS
+*/
+export function loginWithPassword(email,password)
+{
   return (dispatch) => {
-      dispatch(_login({email:email}, pass))
+      dispatch(_login({email:email}, password))
         .then((resp) => {
-          if(resp && !resp.error){
-            dispatch(getUser());
-            dispatch(push('/vatoms'));
-          }
+          dispatch(getUser());
       })
   }
+}
+
+export function login(email){
+
+  return (dispatch) => {
+      dispatch(_login({email:email},""))
+        .then((resp) => {
+          dispatch(_handlePasswordlessLoginResponse(resp))
+      })
+  }
+}
+/*
+  Manages login state
+*/
+function _handlePasswordlessLoginResponse(resp){
+return (dispatch) => {
+  let data = resp.payload.response;
+  if (data.error) { //error condition case
+    switch (data.error) {
+      case ERROR.UNAUTHORIZED:
+      case ERROR.INVALID_PASSWORD:
+          console.log("Invalid Password. Normal Login")
+          // setup the state for the next screen
+          dispatch({type:AUTH.USER_EXISTS}).then((resp)=>{
+            dispatch(push("/login/password-enter"))
+          })
+        break;
+      case ERROR.USERNAME_NOT_FOUND:
+      case ERROR.ACCOUNT_NOT_FOUND:
+          console.log("Account Not Found - New User case");
+          dispatch({type:AUTH.NEW_USER}).then((resp)=>{
+            dispatch(push("/login/password-enter"))
+          })
+        break;
+      default:
+
+    }
+  } else {
+    if(resp && !resp.error){ //200 response from API
+        //we sent the user a link because they have an unprotected Account
+        dispatch({type:AUTH.UNPROTECTED_ACCOUNT}).then((resp)=>{
+          dispatch(push("/login/verify-code"))
+        })
+    }
+  }
+}
 }
 
 export function logoutGuestLoginAndPatch(guest, email, phone_number){
   return (dispatch) => {
-    dispatch(logout())
-      .then((resp) => {
-        dispatch(guestLoginAndPatch(guest, email, phone_number));
-      })
-  }
+        console.log("not private - logout - guestLoginAndPatch")
+        dispatch(logout())
+        .then((resp) => {
+          dispatch(guestLoginAndPatch(guest, email, phone_number));
+        })
+      }
 }
 
 export function guestLoginAndPatch(guest, email, phone_number){
   return (dispatch) => {
-      dispatch(_guestLogin(guest))
-        .then((resp) => {
-          var payload = {
-            password: 'test'
-          };
-          if(email){
-            payload.email = email;
-          }
-          if(phone_number){
-            payload.phone_number = phone_number;
-          }
-          if(resp && !resp.error){
-            if(email || phone_number){
-              dispatch(_updateUser(payload))
-            }
-            setTimeout(()=> {
-              dispatch(fetchVatoms());
-            },500);
-          } else { // Guest Login failed, try email and default pass
-            dispatch(_login(payload, 'test'))
-              .then((resp) => {
-                if(resp && !resp.error){
-                  setTimeout(()=> {
-                    dispatch(fetchVatoms());
-                  },500);
+    detectPrivateMode(function(privateMode){
+      if (privateMode) {
+        dispatch(push("/private"))
+      } else {
+          dispatch(_guestLogin(guest))
+            .then((resp) => {
+              var payload = {
+                password: 'test'
+              };
+              if(email){
+                payload.email = email;
+              }
+              if(phone_number){
+                payload.phone_number = phone_number;
+              }
+              if(resp && !resp.error){
+                if(email || phone_number){
+                  dispatch(_updateUser(payload))
                 }
-              });
-            }
+                setTimeout(()=> {
+                  dispatch(fetchVatoms());
+                },500);
+              } else { // Guest Login failed, try email and default pass
+                dispatch(_login(payload, 'test'))
+                  .then((resp) => {
+                    if(resp && !resp.error){
+                      setTimeout(()=> {
+                        dispatch(fetchVatoms());
+                      },500);
+                    }
+                  });
+                }
+          })
+        }
       })
   }
 }
@@ -318,6 +386,20 @@ function _backendOAuth(provider, token){
   }
 }
 
+// function _login(credential, pass){
+//   const url = `${base_url}/user/vatomic/login`;
+//   var payload = Object.assign({password:pass}, credential);
+//   return {
+//     [CALL_API]: {
+//       endpoint: url,
+//       method: 'POST',
+//       body: JSON.stringify(payload),
+//       types: ['REQUEST', AUTH.LOGIN_SUCCESS,
+//       'FAILURE']
+//     }
+//   }
+// }
+
 function _login(credential, pass){
   const url = `${base_url}/user/vatomic/login`;
   var payload = Object.assign({password:pass}, credential);
@@ -326,7 +408,11 @@ function _login(credential, pass){
       endpoint: url,
       method: 'POST',
       body: JSON.stringify(payload),
-      types: ['REQUEST', AUTH.LOGIN_SUCCESS, 'FAILURE']
+      types: [{
+        type: AUTH.LOGIN_REQUEST,
+        meta: { credential }
+      }, AUTH.LOGIN_SUCCESS,
+      'FAILURE']
     }
   }
 }

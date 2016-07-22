@@ -2,6 +2,7 @@
 
 const path = require('path');
 const webpack = require('webpack');
+const cssnano = require('cssnano');
 const AssetsPlugin = require('assets-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -84,12 +85,19 @@ function webpackConfigFactory({ target, mode }, { json }) {
 // ------------------------------------
 // We use cssnano with the postcss loader, so we tell
 // css-loader not to duplicate minimization.
-const BASE_CSS_LOADER = 'css?sourceMap&-minimize'
+const BASE_CSS_LOADER = 'css?sourceMap&-minimize';
+
+const cssModulesLoader = [
+  BASE_CSS_LOADER,
+  'modules',
+  'importLoaders=1',
+  'localIdentName=[name]__[local]___[hash:base64:5]'
+].join('&');
 
 // Add any packge names here whose styles need to be treated as CSS modules.
 // These paths will be combined into a single regex.
 const PATHS_TO_TREAT_AS_CSS_MODULES = [
-    // 'react-toolbox',
+    'react-toolbox',
 ]
 
 const isUsingCSSModules = !!PATHS_TO_TREAT_AS_CSS_MODULES.length
@@ -190,11 +198,13 @@ const excludeCSSModules = isUsingCSSModules ? cssModulesRegex : false
       libraryTarget: ifServer('commonjs2', 'var'),
     },
     resolve: {
+      modules: [path.join(__dirname, 'src'), 'node_modules'],
       // These extensions are tried when resolving a file.
       extensions: [
         '.js',
         '.jsx',
         '.json',
+        '.scss'
       ],
     },
     plugins: removeEmpty([
@@ -294,7 +304,8 @@ const excludeCSSModules = isUsingCSSModules ? cssModulesRegex : false
             ifServer({
               // We are running a node 6 server which has support for almost
               // all of the ES2015 syntax, therefore we only transpile JSX.
-              presets: ['react'],
+              // @custom: static
+              presets: ['react', 'stage-0'],
             }),
             ifClient({
               // For our clients code we will need to transpile our JS into
@@ -348,7 +359,10 @@ const excludeCSSModules = isUsingCSSModules ? cssModulesRegex : false
             ],
           })
         ),
-        // SCSS (@custom)
+        /*
+         * SCSS
+         * Normal
+         */
         merge(
           { test: /\.scss$/, exclude: excludeCSSModules },
           ifServer({
@@ -376,6 +390,42 @@ const excludeCSSModules = isUsingCSSModules ? cssModulesRegex : false
               'postcss',
               'sass?sourceMap'
             ],
+          })
+        ),// Merge SCSS
+        /*
+         * CSS
+         * CSS Modules
+         */
+        merge(
+          { test: /\.scss$/, include: excludeCSSModules },
+          ifServer({
+            loaders: [
+              'fake-style-loader',
+              cssModulesLoader,
+              'postcss',
+              'sass?sourceMap',
+              'toolbox'
+            ]
+          }),
+          // ifProdClient({
+          //   loader: ExtractTextPlugin.extract({
+          //     notExtractLoader: 'style-loader',
+          //     loaders: [
+          //       cssModulesLoader,
+          //       'postcss',
+          //       'sass',
+          //       'toolbox'
+          //     ]
+          //   }),
+          // }),
+          ifClient({
+            loaders: [
+              'style',
+              cssModulesLoader,
+              'postcss',
+              'sass?sourceMap',
+              'toolbox'
+            ]
           })
         ),// Merge SCSS
 
@@ -415,6 +465,30 @@ const excludeCSSModules = isUsingCSSModules ? cssModulesRegex : false
         { test: /\.(png|jpg|gif)$/,    loader: 'url?limit=8192' }
       ],
     },
+    sassLoader: {
+      includePaths: [
+        path.resolve(__dirname, `./src/styles`),
+        path.resolve(__dirname, `./node_modules`)
+      ]
+    },
+    postcss: [
+      cssnano({
+        autoprefixer: {
+          add: true,
+          remove: true,
+          browsers: ['last 2 versions']
+        },
+        discardComments: {
+          removeAll: true
+        },
+        discardUnused: false,
+        mergeIdents: false,
+        reduceIdents: false,
+        safe: true,
+        sourcemap: true
+      })
+    ],
+    toolbox: {theme: './src/style/themes/toolbox.scss'},
   };
 }
 

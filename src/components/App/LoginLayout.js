@@ -2,11 +2,13 @@ import React from 'react';
 import BrandingLogo from '../../images/branding_lt.png';
 
 
-export default function HomeLayout({children}) {
-  let location = this.props.location.pathname;
+export default function HomeLayout({main, left, children, location}) {
+  let path = location.pathname;
   let loginMsg = '';
 
-  switch (location) {
+  const mainOut = (main) ? main : children;
+
+  switch (path) {
     case "/login":
       loginMsg = "Welcome to vAtomic. Please login or sign up.";
       break;
@@ -19,6 +21,11 @@ export default function HomeLayout({children}) {
     default:
       loginMsg = "Message Default";
   };
+
+  if(left){
+    loginMsg = left
+  }
+
   return (
     <div className="modal">
         <div className="login-frame">
@@ -27,7 +34,7 @@ export default function HomeLayout({children}) {
               <h1>{loginMsg}</h1>
           </div>
           <div className="login-card">
-            {children}
+            {mainOut}
           </div>
         </div>
     </div>

@@ -2,7 +2,7 @@ import { base_url, vatomic_app_id, VATOMS_LOAD, VATOM_LOAD, VATOM_SEND, VATOM_DE
 import { CALL_API } from 'redux-api-middleware';
 import { push } from 'react-router-redux'
 import { animateActiveCard } from './ui';
-import { TRANSITIONS } from 'transitions';
+import { TRANSITIONS } from '../helpers/transitions';
 import _ from 'lodash';
 
 const headers = {
